@@ -63,34 +63,11 @@
 
 #include "clock.h"
 
-
 /* Video */
 
 #define GPIO_PANEL_BACKLIGHT	JZ_GPIO_PORTE(1)
 #define GPIO_PANEL_SOMETHING	JZ_GPIO_PORTF(0)
 
-static int gcw0_panel_init(void **out_panel,
-				     struct device *dev, void *panel_pdata)
-{
-	int ret;
-
-	ret = nt39016_panel_ops.init(out_panel, dev, panel_pdata);
-	if (ret)
-		return ret;
-
-	ret = devm_gpio_request(dev, GPIO_PANEL_SOMETHING, "LCD panel unknown");
-	if (ret) {
-		dev_err(dev,
-			"Failed to request LCD panel unknown pin: %d\n", ret);
-		return ret;
-	}
-
-	gpio_direction_output(GPIO_PANEL_SOMETHING, 1);
-
-	return 0;
-}
-
-/* Video */
 static int gcw0_panel_init(void **out_panel,
 				     struct device *dev, void *panel_pdata)
 {
