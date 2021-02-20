@@ -244,12 +244,12 @@ static struct gpio_keys_button gcw0_buttons[] = {
 		.debounce_interval	= 10,
 	},
 	
-	/* R3 */ {
-		.gpio			= JZ_GPIO_PORTB(15),
-		.active_low		= 1,
-		.code			= KEY_KPDOT,
-		.debounce_interval	= 10,
-	},
+//	/* R3 */ {
+//		.gpio			= JZ_GPIO_PORTB(15),
+//		.active_low		= 1,
+//		.code			= KEY_KPDOT,
+//		.debounce_interval	= 10,
+//	},
 
 	
 	/* VOL_UP */ {
@@ -726,10 +726,10 @@ static const struct linkdev_pdata_key_map gcw0_key_map[] = {
 		.code = KEY_KPSLASH,
 		.event.code = BTN_THUMBL,
 	},
-	{
-		.code = KEY_KPDOT,
-		.event.code = BTN_THUMBR,
-	},
+//	{
+//		.code = KEY_KPDOT,
+//		.event.code = BTN_THUMBR,
+//	},
 
 };
 
@@ -754,7 +754,7 @@ static const struct linkdev_pdata_abs_map gcw0_abs_map[] = {
 		.axis = ABS_HAT0Y,
 		.axis_dest = ABS_HAT0Y,
 	},
-	{
+/*	{
 		.name = "analog joystick",
 		.axis = ABS_RX,
 		.axis_dest = ABS_RX,
@@ -764,7 +764,7 @@ static const struct linkdev_pdata_abs_map gcw0_abs_map[] = {
 		.axis = ABS_RY,
 		.axis_dest = ABS_RY,
 	},
-
+*/
 };
 
 static struct linkdev_platform_data gcw0_joystick_pdata = {
