@@ -24,7 +24,7 @@
 #include <linux/mfd/core.h>
 
 #include <linux/jz4770-adc.h>
-
+#define RIGHT_REMOTE_SENSING_NOT_WORK
 
 #define JZ_REG_ADC_TS_SAME	0
 #define JZ_REG_ADC_TS_WAIT	4
@@ -32,21 +32,21 @@
 
 #define JOYSTICK_MIN_X1		2000
 #define JOYSTICK_MIN_Y1		2000
-#define JOYSTICK_MIN_X2		500
-#define JOYSTICK_MIN_Y2		500
+//#define JOYSTICK_MIN_X2		500
+//#define JOYSTICK_MIN_Y2		500
 
 #define JOYSTICK_MAX_X1		1300
 #define JOYSTICK_MAX_Y1		1300
-#define JOYSTICK_MAX_X2		2800
-#define JOYSTICK_MAX_Y2		2800
+//#define JOYSTICK_MAX_X2		2800
+//#define JOYSTICK_MAX_Y2		2800
 #define JOYSTICK_NOISE_X1	4
 #define JOYSTICK_NOISE_Y1	4
-#define JOYSTICK_NOISE_X2	4
-#define JOYSTICK_NOISE_Y2	4
+//#define JOYSTICK_NOISE_X2	4
+//#define JOYSTICK_NOISE_Y2	4
 #define JOYSTICK_FLAT_X1	200
 #define JOYSTICK_FLAT_Y1	200
-#define JOYSTICK_FLAT_X2	200
-#define JOYSTICK_FLAT_Y2	200
+//#define JOYSTICK_FLAT_X2	200
+//#define JOYSTICK_FLAT_Y2	200
 
 
 struct jz_joystick {
@@ -64,16 +64,16 @@ struct jz_joystick {
 static irqreturn_t jz_joystick_irq_handler(int irq, void *devid)
 {
 	struct jz_joystick *joystick = devid;
-	unsigned long val,val2;
-	int x1, y1, x2, y2;
+	unsigned long val/*,val2*/;
+	int x1, y1/*, x2, y2*/;
 
 	val = readl(joystick->base + JZ_REG_ADC_TS_DATA);
-	val2 = readl(joystick->base + JZ_REG_ADC_TS_DATA);
+//	val2 = readl(joystick->base + JZ_REG_ADC_TS_DATA);
 	x1 = (val >> 16) & 0xFFF;
 	y1 = val & 0xFFF;
 	
-	x2 = (val2 >> 16) & 0xFFF;
-	y2 = val2 & 0xFFF;
+//	x2 = (val2 >> 16) & 0xFFF;
+//	y2 = val2 & 0xFFF;
 	
 	//printk("joystick: x1=%d y1=%d\n", x1, y1);
 	//printk("joystick: x2=%d y2=%d\n", x2, y2);
@@ -81,8 +81,8 @@ static irqreturn_t jz_joystick_irq_handler(int irq, void *devid)
 	input_report_abs(joystick->input_dev, ABS_X, x1);
 	input_report_abs(joystick->input_dev, ABS_Y, y1);
 	
-	input_report_abs(joystick->input_dev, ABS_RX, x2);
-	input_report_abs(joystick->input_dev, ABS_RY, y2);
+//	input_report_abs(joystick->input_dev, ABS_RX, x2);
+//	input_report_abs(joystick->input_dev, ABS_RY, y2);
 	
 	input_sync(joystick->input_dev);
 
@@ -175,10 +175,10 @@ static int jz_joystick_probe(struct platform_device *pdev)
 			     JOYSTICK_NOISE_X1, JOYSTICK_FLAT_X1);
 	input_set_abs_params(input_dev, ABS_Y, JOYSTICK_MIN_Y1, JOYSTICK_MAX_Y1,
 			     JOYSTICK_NOISE_Y1, JOYSTICK_FLAT_Y1);
-	input_set_abs_params(input_dev, ABS_RX, JOYSTICK_MIN_X2, JOYSTICK_MAX_X2,
-			     JOYSTICK_NOISE_X2, JOYSTICK_FLAT_X2);
-	input_set_abs_params(input_dev, ABS_RY, JOYSTICK_MIN_Y2, JOYSTICK_MAX_Y2,
-			     JOYSTICK_NOISE_Y2, JOYSTICK_FLAT_Y2);
+//	input_set_abs_params(input_dev, ABS_RX, JOYSTICK_MIN_X2, JOYSTICK_MAX_X2,
+//			     JOYSTICK_NOISE_X2, JOYSTICK_FLAT_X2);
+//	input_set_abs_params(input_dev, ABS_RY, JOYSTICK_MIN_Y2, JOYSTICK_MAX_Y2,
+//			     JOYSTICK_NOISE_Y2, JOYSTICK_FLAT_Y2);
 
 	input_set_drvdata(input_dev, joystick);
 	input_dev->open = jz_joystick_open;
