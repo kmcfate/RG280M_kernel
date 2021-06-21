@@ -64,8 +64,8 @@ struct jz_joystick {
 static irqreturn_t jz_joystick_irq_handler(int irq, void *devid)
 {
 	struct jz_joystick *joystick = devid;
-	unsigned long val/*,val2*/;
-	int x1, y1/*, x2, y2*/;
+	unsigned long val;
+	int x1, y1;
 
 	val = readl(joystick->base + JZ_REG_ADC_TS_DATA);
 //	val2 = readl(joystick->base + JZ_REG_ADC_TS_DATA);
