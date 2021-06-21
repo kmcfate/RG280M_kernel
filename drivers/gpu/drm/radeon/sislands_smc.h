@@ -194,7 +194,6 @@ typedef struct SISLANDS_SMC_SWSTATE SISLANDS_SMC_SWSTATE;
 #define SISLANDS_SMC_VOLTAGEMASK_VDDC  0
 #define SISLANDS_SMC_VOLTAGEMASK_MVDD  1
 #define SISLANDS_SMC_VOLTAGEMASK_VDDCI 2
-#define SISLANDS_SMC_VOLTAGEMASK_VDDC_PHASE_SHEDDING 3
 #define SISLANDS_SMC_VOLTAGEMASK_MAX   4
 
 struct SISLANDS_SMC_VOLTAGEMASKTABLE
@@ -375,8 +374,6 @@ typedef struct Smc_SIslands_DTE_Configuration Smc_SIslands_DTE_Configuration;
 
 #pragma pack(pop)
 
-int si_set_smc_sram_address(struct radeon_device *rdev,
-			    u32 smc_address, u32 limit);
 int si_copy_bytes_to_smc(struct radeon_device *rdev,
 			 u32 smc_start_address,
 			 const u8 *src, u32 byte_count, u32 limit);

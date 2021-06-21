@@ -139,8 +139,6 @@ struct qxl_crtc {
 	int index;
 	int cur_x;
 	int cur_y;
-	int hot_spot_x;
-	int hot_spot_y;
 };
 
 struct qxl_output {
@@ -325,8 +323,8 @@ struct qxl_device {
 	struct work_struct gc_work;
 
 	struct work_struct fb_work;
-	int monitors_config_width;
-	int monitors_config_height;
+
+	struct drm_property *hotplug_mode_update_property;
 };
 
 /* forward declaration for QXL_INFO_IO */
@@ -416,7 +414,6 @@ int qxl_gem_object_create_with_handle(struct qxl_device *qdev,
 				      struct qxl_surface *surf,
 				      struct qxl_bo **qobj,
 				      uint32_t *handle);
-int qxl_gem_object_init(struct drm_gem_object *obj);
 void qxl_gem_object_free(struct drm_gem_object *gobj);
 int qxl_gem_object_open(struct drm_gem_object *obj, struct drm_file *file_priv);
 void qxl_gem_object_close(struct drm_gem_object *obj,
@@ -537,7 +534,7 @@ void qxl_debugfs_takedown(struct drm_minor *minor);
 
 /* qxl_irq.c */
 int qxl_irq_init(struct qxl_device *qdev);
-irqreturn_t qxl_irq_handler(DRM_IRQ_ARGS);
+irqreturn_t qxl_irq_handler(int irq, void *arg);
 
 /* qxl_fb.c */
 int qxl_fb_init(struct qxl_device *qdev);

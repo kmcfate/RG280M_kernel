@@ -85,7 +85,7 @@ static const char *const dsi_errors[] = {
 	"RX Prot Violation",
 	"HS Generic Write FIFO Full",
 	"LP Generic Write FIFO Full",
-	"Generic Read Data Avail",
+	"Generic Read Data Avail"
 	"Special Packet Sent",
 	"Tearing Effect",
 };
@@ -148,7 +148,7 @@ static int handle_dsi_error(struct mdfld_dsi_pkg_sender *sender, u32 mask)
 		break;
 	case BIT(14):
 		/*wait for all fifo empty*/
-		/*wait_for_all_fifos_empty(sender)*/;
+		/*wait_for_all_fifos_empty(sender)*/
 		break;
 	case BIT(15):
 		dev_dbg(sender->dev->dev, "No Action required\n");
